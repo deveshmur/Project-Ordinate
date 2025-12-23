@@ -90,16 +90,6 @@ This enables strong privacy with low latency.
 
 ---
 
-## Example Workflow
-1. Choose a template (e.g., “Team Meeting”).  
-2. Select **Text Mode** or **Voice Mode**.  
-3. Type or record raw notes.  
-4. Ordinate cleans and organizes the content.  
-5. Review/edit the structured document.  
-6. Export as PDF.  
-
----
-
 ## Project Status
 Actively in development.  
 MVP includes:
@@ -126,4 +116,3 @@ Detailed documents are located in the [`docs/`](./docs) folder:
 
 ## Contributions
 This is a personal project, but feedback and suggestions are welcome.  
-Feel free to open an issue.
