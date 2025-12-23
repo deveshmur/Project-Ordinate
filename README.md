@@ -41,27 +41,6 @@ This project reflects my interests in **NLP**, **voice interfaces**, and **full-
 
 ---
 
-## System Architecture
-
-### **Frontend**
-- JavaScript + React  
-- MediaRecorder API for audio capture  
-- WebAssembly bindings for Whisper.cpp  
-
-### **Backend**
-- Java + Spring Boot  
-- REST API for text processing, organization, and confidence scoring  
-- Optional audio ingestion endpoint  
-
-### **Database**
-- PostgreSQL for persistence of generated documents and templates  
-
-### **Exporting**
-- Apache PDFBox for PDF generation  
-- Markdown generation supported  
-
----
-
 ## NLP Pipeline Overview
 Ordinate uses a lightweight pipeline built for simplicity and reliability:
 
@@ -91,10 +70,23 @@ This enables strong privacy with low latency.
 
 ---
 
-## Industry Templates (MVP)
-- **Software Engineer – Team Meeting Notes**  
-- **College Student – Lecture Notes**  
-- **Healthcare – Clinical SOAP Note**  
+## System Architecture
+
+### **Frontend**
+- JavaScript + React  
+- MediaRecorder API for audio capture  
+- WebAssembly bindings for Whisper.cpp  
+
+### **Backend**
+- Java + Spring Boot  
+- REST API for text processing, organization, and confidence scoring  
+- Optional audio ingestion endpoint  
+
+### **Database**
+- PostgreSQL for persistence of generated documents and templates  
+
+### **Exporting**
+- Apache PDFBox for PDF generation  
 
 ---
 
@@ -108,18 +100,6 @@ This enables strong privacy with low latency.
 
 ---
 
-## Technologies & Tools
-- **Frontend:** JavaScript, React, MediaRecorder API  
-- **Speech-to-Text:** Whisper.cpp, WebAssembly (WASM)  
-- **Backend:** Java, Spring Boot (Spring MVC, Spring Data JPA)  
-- **NLP Pipeline:** Regex-based cleaning, custom sentence tokenizer, heuristic section mapper  
-- **File Handling:** Spring Boot Multipart Resolver, Java NIO file APIs, WASM bindings for Whisper.cpp  
-- **Database:** PostgreSQL  
-- **Exporting:** Apache PDFBox  
-- **Build:** Maven  
-
----
-
 ## Project Status
 Actively in development.  
 MVP includes:
@@ -130,16 +110,6 @@ MVP includes:
 - PDF export  
 
 Future versions will expand into template editing, real-time validation, analytics, search, and mobile clients.
-
----
-
-## Roadmap
-- Real-time cross-checking while typing  
-- Custom template builder  
-- Speaker diarization  
-- Search, tagging, versioning, analytics  
-- Native iOS client (SwiftUI)  
-- Team collaboration features  
 
 ---
 
@@ -157,10 +127,3 @@ Detailed documents are located in the [`docs/`](./docs) folder:
 ## Contributions
 This is a personal project, but feedback and suggestions are welcome.  
 Feel free to open an issue.
-
----
-
-## 📬 Contact
-If you're interested in discussing this project or opportunities:  
-**email: dmdevesh@gmail.com**
-
