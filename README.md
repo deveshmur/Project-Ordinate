@@ -37,7 +37,7 @@ Ordinate aims to bridge that gap by offering:
 - clarity checks  
 - a clean workflow from **thought → structure → documentation**
 
-This project reflects my interests in **NLP**, **voice interfaces**, and **full-stack engineering**.
+This project reflects my interests in **Full-Stack Software Engineering**, and **Machine Learning**. 
 
 ---
 
