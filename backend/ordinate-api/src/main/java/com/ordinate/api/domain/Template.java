@@ -8,19 +8,27 @@ import java.util.UUID;
 
 public class Template {
     private final UUID id;
+    private final TemplateKey key;
+
     private final Instant createdAt;
     private Instant lastModifiedAt;
 
     private final List<TemplateSection> sections = new ArrayList<>();
 
-    public Template() {
+    public Template(TemplateKey key) {
+        if (key == null) throw new IllegalArgumentException("key cannot be null");
         this.id = UUID.randomUUID();
+        this.key = key;
         this.createdAt = Instant.now();
         this.lastModifiedAt = this.createdAt;
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public TemplateKey getKey() {
+        return key;
     }
 
     public Instant getCreatedAt() {
@@ -36,9 +44,7 @@ public class Template {
     }
 
     public void addSection(TemplateSection section) {
-        if (section == null) {
-            throw new IllegalArgumentException("section cannot be null");
-        }
+        if (section == null) throw new IllegalArgumentException("section cannot be null");
         this.sections.add(section);
         touch();
     }
