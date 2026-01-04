@@ -10,14 +10,13 @@ import java.util.List;
 public class TemplateService {
    public Template getSoftwareTeamMeetingTemplate() {
 
-        Template template = new Template();
+    Template template = new Template();
 
-        List<TemplateSection> sections = List.of(
-                new TemplateSection(1), // Agenda
-                new TemplateSection(2), // Discussion
-                new TemplateSection(3), // Decisions
-                new TemplateSection(4)  // Action Items
-        );
-        return template;
-    } 
+    template.addSection(new TemplateSection(1)); // Agenda
+    template.addSection(new TemplateSection(2)); // Discussion
+    template.addSection(new TemplateSection(3)); // Decisions
+    template.addSection(new TemplateSection(4)); // Action Items
+
+    return template;
+    }
 }
