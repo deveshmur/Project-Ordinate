@@ -16,6 +16,14 @@ public class TemplateService {
         };
     }
 
+    public java.util.List<Template> getAllTemplates() {
+        return java.util.List.of(
+                getTemplate(TemplateKey.SOFTWARE_TEAM_MEETING),
+                getTemplate(TemplateKey.STUDENT_LECTURE_NOTES),
+                getTemplate(TemplateKey.HEALTHCARE_SOAP_NOTE)
+        );
+    }
+
     private Template softwareTeamMeeting() {
         Template template = new Template(TemplateKey.SOFTWARE_TEAM_MEETING);
         template.addSection(new TemplateSection(1)); // Agenda

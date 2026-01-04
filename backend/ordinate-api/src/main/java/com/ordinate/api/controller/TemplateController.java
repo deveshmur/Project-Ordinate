@@ -19,6 +19,13 @@ public class TemplateController {
         this.templateService = templateService;
     }
 
+    @GetMapping
+    public java.util.List<TemplateResponseDto> listTemplates() {
+        return templateService.getAllTemplates().stream()
+                .map(this::toDto)
+                .toList();
+    }
+
     @GetMapping("/{key}")
     public TemplateResponseDto getTemplateByKey(@PathVariable TemplateKey key) {
         return toDto(templateService.getTemplate(key));
