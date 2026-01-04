@@ -1,0 +1,36 @@
+package com.ordinate.api.service;
+
+import com.ordinate.api.domain.Document;
+import com.ordinate.api.domain.DocumentSection;
+import com.ordinate.api.dto.DocumentResponseDto;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class DocumentService {
+    public DocumentResponseDto createSampleDocument() {
+
+        Document document = new Document();
+
+        DocumentSection section = new DocumentSection();
+        document.addSection(section);
+
+        return mapToDto(document);
+    }
+
+    private DocumentResponseDto mapToDto(Document document) {
+        return new DocumentResponseDto(
+                document.getId(),
+                document.getCreatedAt(),
+                document.getLastModifiedAt(),
+                document.getSections().stream()
+                        .map(s -> new DocumentResponseDto.DocumentSectionResponseDto(
+                                s.getId(),
+                                s.getCreatedAt(),
+                                s.getLastModifiedAt()
+                        ))
+                        .toList()
+        );
+    }
+}
