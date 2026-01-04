@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: ordinate-api
+  profiles:
+    active: dev
+
   jpa:
     open-in-view: false
     hibernate:
