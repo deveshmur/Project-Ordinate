@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping("/api/templates")
 public class TemplateController {
+
     private final TemplateService templateService;
 
     public TemplateController(TemplateService templateService) {
@@ -23,6 +23,7 @@ public class TemplateController {
 
         return new TemplateResponseDto(
                 template.getId(),
+                template.getKey(),
                 template.getCreatedAt(),
                 template.getLastModifiedAt(),
                 template.getSections().stream()
