@@ -12,7 +12,13 @@ public class DocumentSection {
     private final String name;
     private final int orderIndex;
 
+    private String content;
+
     public DocumentSection(String name, int orderIndex) {
+        this(name, orderIndex, "");
+    }
+
+    public DocumentSection(String name, int orderIndex, String content) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("name cannot be blank");
         }
@@ -21,6 +27,7 @@ public class DocumentSection {
         this.lastModifiedAt = this.createdAt;
         this.name = name;
         this.orderIndex = orderIndex;
+        this.content = content == null ? "" : content;
     }
 
     public UUID getId() {
@@ -41,6 +48,15 @@ public class DocumentSection {
 
     public int getOrderIndex() {
         return orderIndex;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content == null ? "" : content;
+        touch();
     }
 
     public void touch() {
