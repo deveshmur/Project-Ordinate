@@ -46,6 +46,7 @@ public class TemplateController {
                         .map(s -> new TemplateResponseDto.TemplateSectionResponseDto(
                                 s.getId(),
                                 s.getCreatedAt(),
+                                s.getName(),
                                 s.getOrderIndex()
                         ))
                         .toList()
