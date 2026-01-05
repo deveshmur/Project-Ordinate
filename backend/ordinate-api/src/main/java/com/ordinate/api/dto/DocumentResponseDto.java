@@ -8,7 +8,8 @@ public record DocumentResponseDto(
         UUID id,
         Instant createdAt,
         Instant lastModifiedAt,
-        List<DocumentSectionResponseDto> sections
+        List<DocumentSectionResponseDto> sections,
+        List<String> missingSections
 ) {
     public record DocumentSectionResponseDto(
             UUID id,

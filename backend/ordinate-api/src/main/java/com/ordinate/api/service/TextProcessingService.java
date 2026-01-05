@@ -6,6 +6,8 @@ import com.ordinate.api.domain.Template;
 import com.ordinate.api.dto.DocumentResponseDto;
 import com.ordinate.api.dto.ProcessTextRequestDto;
 import org.springframework.stereotype.Service;
+import com.ordinate.api.domain.DocumentSection;
+
 
 @Service
 public class TextProcessingService {
@@ -48,20 +50,28 @@ public class TextProcessingService {
         document.setSectionContent("Decisions", decisions.toString().trim());
         document.setSectionContent("Action Items", actionItems.toString().trim());
 
+        var sectionDtos = document.getSections().stream()
+        .map(s -> new DocumentResponseDto.DocumentSectionResponseDto(
+                s.getId(),
+                s.getCreatedAt(),
+                s.getLastModifiedAt(),
+                s.getName(),
+                s.getOrderIndex(),
+                s.getContent()
+        ))
+        .toList();
+
+        var missing = document.getSections().stream()
+                .filter(s -> s.getContent() == null || s.getContent().isBlank())
+                .map(DocumentSection::getName)
+                .toList();
+
         return new DocumentResponseDto(
                 document.getId(),
                 document.getCreatedAt(),
                 document.getLastModifiedAt(),
-                document.getSections().stream()
-                    .map(s -> new DocumentResponseDto.DocumentSectionResponseDto(
-                            s.getId(),
-                            s.getCreatedAt(),
-                            s.getLastModifiedAt(),
-                            s.getName(),
-                            s.getOrderIndex(),
-                            s.getContent()
-                    ))
-                    .toList()
+                sectionDtos,
+                missing
         );
     }
 }
