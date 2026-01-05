@@ -1,0 +1,92 @@
+import { useRef, useState } from "react";
+
+export default function Voice() {
+  const mediaRecorderRef = useRef(null);
+  const chunksRef = useRef([]);
+
+  const [recording, setRecording] = useState(false);
+  const [audioUrl, setAudioUrl] = useState(null);
+  const [audioBlob, setAudioBlob] = useState(null);
+  const [error, setError] = useState(null);
+
+  async function startRecording() {
+    setError(null);
+    setAudioUrl(null);
+    setAudioBlob(null);
+
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+      const mr = new MediaRecorder(stream);
+      mediaRecorderRef.current = mr;
+      chunksRef.current = [];
+
+      mr.ondataavailable = (e) => {
+        if (e.data && e.data.size > 0) chunksRef.current.push(e.data);
+      };
+
+      mr.onstop = () => {
+        stream.getTracks().forEach((t) => t.stop());
+
+        const blob = new Blob(chunksRef.current, { type: mr.mimeType });
+        const url = URL.createObjectURL(blob);
+        setAudioBlob(blob);
+        setAudioUrl(url);
+      };
+
+      mr.start();
+      setRecording(true);
+    } catch (e) {
+      setError(
+        e?.message ||
+          "Failed to access microphone. Check browser permissions."
+      );
+    }
+  }
+
+  function stopRecording() {
+    const mr = mediaRecorderRef.current;
+    if (mr && mr.state !== "inactive") {
+      mr.stop();
+    }
+    setRecording(false);
+  }
+
+  return (
+    <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
+      <h1>Voice Mode (Groundwork)</h1>
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+
+      <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1rem" }}>
+        <button onClick={startRecording} disabled={recording}>
+          Start Recording
+        </button>
+        <button onClick={stopRecording} disabled={!recording}>
+          Stop
+        </button>
+      </div>
+
+      {recording && <p>Recording…</p>}
+
+      {audioUrl && (
+        <>
+          <h2>Playback</h2>
+          <audio controls src={audioUrl} />
+
+          <h3>Debug Info</h3>
+          <pre style={{ background: "#f4f4f4", color: "#111", padding: "1rem" }}>
+            {JSON.stringify(
+              {
+                mimeType: audioBlob?.type,
+                sizeBytes: audioBlob?.size,
+              },
+              null,
+              2
+            )}
+          </pre>
+        </>
+      )}
+    </div>
+  );
+}
