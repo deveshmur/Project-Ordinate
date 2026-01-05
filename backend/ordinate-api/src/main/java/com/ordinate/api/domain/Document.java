@@ -43,6 +43,16 @@ private final UUID id;
         touch();
     }
 
+    public void setSectionContent(int orderIndex, String content) {
+        DocumentSection section = this.sections.stream()
+                .filter(s -> s.getOrderIndex() == orderIndex)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No section found for orderIndex=" + orderIndex));
+
+            section.setContent(content);
+            touch();
+    }
+
     public void touch() {
         this.lastModifiedAt = Instant.now();
     }

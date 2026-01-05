@@ -19,11 +19,13 @@ public class TextProcessingService {
     public DocumentResponseDto processText(ProcessTextRequestDto request) {
         Template template = templateService.getTemplate(request.templateKey());
 
-        Document document = new Document();
+       Document document = new Document();
 
         template.getSections().forEach(ts ->
                 document.addSection(new DocumentSection(ts.getName(), ts.getOrderIndex()))
         );
+
+        document.setSectionContent(1, request.rawText());
 
         return new DocumentResponseDto(
                 document.getId(),
