@@ -27,7 +27,7 @@ public class TextProcessingService {
                 document.addSection(new DocumentSection(ts.getName(), ts.getOrderIndex()))
         );
 
-        String raw = request.rawText().trim();
+        String raw = cleanFillerWords(request.rawText()).trim();
         String[] sentences = raw.split("(?<=[.!?])\\s+");
 
         StringBuilder discussion = new StringBuilder();
@@ -75,12 +75,20 @@ public class TextProcessingService {
                 missing
         );
     }
-    
+
     private double confidenceFromContent(String content) {
         if (content == null || content.isBlank()) return 0.0;
 
         int len = content.trim().length();
         double score = Math.min(1.0, len / 120.0);
         return Math.round(score * 100.0) / 100.0;
-    }   
+    }
+
+    private String cleanFillerWords(String input) {
+        if (input == null) return "";
+        return input
+                .replaceAll("(?i)\\b(um|uh|like|you know|i mean)\\b", "")
+                .replaceAll("\\s{2,}", " ")
+                .trim();
+    }
 }
