@@ -53,8 +53,7 @@ export default function Voice() {
   }
 
   return (
-    <div style={{ padding: "2rem", maxWidth: "800px", margin: "0 auto" }}>
-      <h1>Voice Mode (Groundwork)</h1>
+    <div style={{ padding: "1rem", maxWidth: "800px", margin: "0 auto" }}>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 

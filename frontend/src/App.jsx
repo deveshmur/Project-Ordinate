@@ -35,10 +35,10 @@ export default function App() {
   }
 
   return (
-    <div style={{ padding: "2rem", maxWidth: "900px", margin: "0 auto" }}>
+    <div style={{ padding: "2rem", maxWidth: "900px", margin: "0rem" }}>
       <h1>Project Ordinate</h1>
 
-      <div style={{ display: "flex", gap: "0.75rem", marginBottom: "1rem" }}>
+      <div style={{ display: "flex", gap: "0.75rem", marginBottom: "5rem" }}>
         <button onClick={() => setMode("text")}>Text Mode</button>
         <button onClick={() => setMode("voice")}>Voice Mode</button>
       </div>
