@@ -25,7 +25,28 @@ public class TextProcessingService {
                 document.addSection(new DocumentSection(ts.getName(), ts.getOrderIndex()))
         );
 
-        document.setSectionContent(1, request.rawText());
+        String raw = request.rawText().trim();
+        String[] sentences = raw.split("(?<=[.!?])\\s+");
+
+        StringBuilder discussion = new StringBuilder();
+        StringBuilder decisions = new StringBuilder();
+        StringBuilder actionItems = new StringBuilder();
+
+        for (String s : sentences) {
+            String lower = s.toLowerCase();
+
+            if (lower.contains("decide") || lower.contains("decision")) {
+                decisions.append(s).append("\n");
+            } else if (lower.contains("action") || lower.contains("todo") || lower.contains("assign")) {
+                actionItems.append(s).append("\n");
+            } else {
+                discussion.append(s).append("\n");
+            }
+        }
+
+        document.setSectionContent(2, discussion.toString().trim());
+        document.setSectionContent(3, decisions.toString().trim());
+        document.setSectionContent(4, actionItems.toString().trim());
 
         return new DocumentResponseDto(
                 document.getId(),
