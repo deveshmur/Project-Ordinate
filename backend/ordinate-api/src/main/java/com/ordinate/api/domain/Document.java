@@ -53,6 +53,21 @@ private final UUID id;
             touch();
     }
 
+    public void setSectionContent(String sectionName, String content) {
+        if (sectionName == null || sectionName.isBlank()) {
+            throw new IllegalArgumentException("sectionName cannot be blank");
+        }
+
+        DocumentSection section = this.sections.stream()
+                .filter(s -> sectionName.equalsIgnoreCase(s.getName()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No section found for name=" + sectionName));
+
+        section.setContent(content);
+        touch();
+    }
+
+
     public void touch() {
         this.lastModifiedAt = Instant.now();
     }

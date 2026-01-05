@@ -44,9 +44,9 @@ public class TextProcessingService {
             }
         }
 
-        document.setSectionContent(2, discussion.toString().trim());
-        document.setSectionContent(3, decisions.toString().trim());
-        document.setSectionContent(4, actionItems.toString().trim());
+        document.setSectionContent("Discussion", discussion.toString().trim());
+        document.setSectionContent("Decisions", decisions.toString().trim());
+        document.setSectionContent("Action Items", actionItems.toString().trim());
 
         return new DocumentResponseDto(
                 document.getId(),
