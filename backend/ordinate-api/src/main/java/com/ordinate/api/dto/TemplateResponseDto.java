@@ -16,6 +16,7 @@ public record TemplateResponseDto(
     public record TemplateSectionResponseDto(
             UUID id,
             Instant createdAt,
+            String name,
             int orderIndex
     ) {}
 }
