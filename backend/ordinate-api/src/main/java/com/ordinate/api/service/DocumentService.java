@@ -25,12 +25,14 @@ public class DocumentService {
                 document.getCreatedAt(),
                 document.getLastModifiedAt(),
                 document.getSections().stream()
-                        .map(s -> new DocumentResponseDto.DocumentSectionResponseDto(
-                                s.getId(),
-                                s.getCreatedAt(),
-                                s.getLastModifiedAt()
-                        ))
-                        .toList()
+                    .map(s -> new DocumentResponseDto.DocumentSectionResponseDto(
+                            s.getId(),
+                            s.getCreatedAt(),
+                            s.getLastModifiedAt(),
+                            s.getName(),
+                            s.getOrderIndex()
+                    ))
+                    .toList()
         );
     }
 }
