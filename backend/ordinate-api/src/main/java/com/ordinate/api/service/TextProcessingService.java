@@ -10,13 +10,6 @@ import org.springframework.stereotype.Service;
 public class TextProcessingService {
 
     public DocumentResponseDto processText(ProcessTextRequestDto request) {
-        if (request == null) throw new IllegalArgumentException("request cannot be null");
-        if (request.templateKey() == null) throw new IllegalArgumentException("templateKey is required");
-        if (request.rawText() == null || request.rawText().isBlank()) {
-            throw new IllegalArgumentException("rawText is required");
-        }
-
-        // STUB: later map rawText into multiple sections using the template
         Document document = new Document();
         DocumentSection section = new DocumentSection();
         document.addSection(section);
