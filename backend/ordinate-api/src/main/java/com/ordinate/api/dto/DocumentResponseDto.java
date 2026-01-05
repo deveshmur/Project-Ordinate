@@ -13,6 +13,8 @@ public record DocumentResponseDto(
     public record DocumentSectionResponseDto(
             UUID id,
             Instant createdAt,
-            Instant lastModifiedAt
+            Instant lastModifiedAt,
+            String name,
+            int orderIndex
     ) {}
 }

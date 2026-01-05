@@ -21,7 +21,9 @@ public class TextProcessingService {
 
         Document document = new Document();
 
-        template.getSections().forEach(ts -> document.addSection(new DocumentSection()));
+        template.getSections().forEach(ts ->
+                document.addSection(new DocumentSection(ts.getName(), ts.getOrderIndex()))
+        );
 
         return new DocumentResponseDto(
                 document.getId(),

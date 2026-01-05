@@ -13,7 +13,7 @@ public class DocumentService {
 
         Document document = new Document();
 
-        DocumentSection section = new DocumentSection();
+        DocumentSection section = new DocumentSection("Sample Section", 1);
         document.addSection(section);
 
         return mapToDto(document);
