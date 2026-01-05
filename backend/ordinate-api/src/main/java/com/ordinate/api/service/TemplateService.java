@@ -26,28 +26,28 @@ public class TemplateService {
 
     private Template softwareTeamMeeting() {
         Template template = new Template(TemplateKey.SOFTWARE_TEAM_MEETING);
-        template.addSection(new TemplateSection(1)); // Agenda
-        template.addSection(new TemplateSection(2)); // Discussion
-        template.addSection(new TemplateSection(3)); // Decisions
-        template.addSection(new TemplateSection(4)); // Action Items
+        template.addSection(new TemplateSection("Agenda", 1));
+        template.addSection(new TemplateSection("Discussion", 2));
+        template.addSection(new TemplateSection("Decisions", 3));
+        template.addSection(new TemplateSection("Action Items", 4));
         return template;
     }
 
     private Template studentLectureNotes() {
         Template template = new Template(TemplateKey.STUDENT_LECTURE_NOTES);
-        template.addSection(new TemplateSection(1)); // Topic / Title
-        template.addSection(new TemplateSection(2)); // Key Concepts
-        template.addSection(new TemplateSection(3)); // Examples
-        template.addSection(new TemplateSection(4)); // Questions / Confusions
+        template.addSection(new TemplateSection("Topic / Title", 1));
+        template.addSection(new TemplateSection("Key Concepts", 2));
+        template.addSection(new TemplateSection("Examples", 3));
+        template.addSection(new TemplateSection("Questions / Confusions", 4));
         return template;
     }
 
     private Template healthcareSoapNote() {
         Template template = new Template(TemplateKey.HEALTHCARE_SOAP_NOTE);
-        template.addSection(new TemplateSection(1)); // Subjective
-        template.addSection(new TemplateSection(2)); // Objective
-        template.addSection(new TemplateSection(3)); // Assessment
-        template.addSection(new TemplateSection(4)); // Plan
+        template.addSection(new TemplateSection("Subjective", 1));
+        template.addSection(new TemplateSection("Objective", 2));
+        template.addSection(new TemplateSection("Assessment", 3));
+        template.addSection(new TemplateSection("Plan", 4));
         return template;
     }
 }
