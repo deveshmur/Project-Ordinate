@@ -27,7 +27,8 @@ public class DocumentService {
                         s.getLastModifiedAt(),
                         s.getName(),
                         s.getOrderIndex(),
-                        s.getContent()
+                        s.getContent(),
+                        confidenceFromContent(s.getContent())
                 ))
                 .toList();
 
@@ -43,5 +44,13 @@ public class DocumentService {
                 sectionDtos,
                 missing
         );
+    }
+    
+    private double confidenceFromContent(String content) {
+        if (content == null || content.isBlank()) return 0.0;
+
+        int len = content.trim().length();
+        double score = Math.min(1.0, len / 120.0);
+        return Math.round(score * 100.0) / 100.0;
     }
 }
