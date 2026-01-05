@@ -15,6 +15,7 @@ public record DocumentResponseDto(
             Instant createdAt,
             Instant lastModifiedAt,
             String name,
-            int orderIndex
+            int orderIndex,
+            String content
     ) {}
 }
