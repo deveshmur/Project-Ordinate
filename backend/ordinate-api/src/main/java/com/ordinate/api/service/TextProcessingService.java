@@ -35,7 +35,8 @@ public class TextProcessingService {
                             s.getCreatedAt(),
                             s.getLastModifiedAt(),
                             s.getName(),
-                            s.getOrderIndex()
+                            s.getOrderIndex(),
+                            s.getContent()
                     ))
                     .toList()
         );
