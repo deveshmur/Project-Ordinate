@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/api/process")
@@ -19,7 +21,7 @@ public class ProcessingController {
     }
 
     @PostMapping("/text")
-    public DocumentResponseDto processText(@RequestBody ProcessTextRequestDto request) {
+    public DocumentResponseDto processText(@Valid @RequestBody ProcessTextRequestDto request) {
         return textProcessingService.processText(request);
     }
 }
