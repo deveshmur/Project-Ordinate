@@ -6,13 +6,14 @@ export default function Voice() {
 
   const [recording, setRecording] = useState(false);
   const [audioUrl, setAudioUrl] = useState(null);
-  const [audioBlob, setAudioBlob] = useState(null);
+  const [audioFile, setAudioFile] = useState(null);
   const [error, setError] = useState(null);
+
 
   async function startRecording() {
     setError(null);
     setAudioUrl(null);
-    setAudioBlob(null);
+    setAudioFile(null);
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -30,7 +31,11 @@ export default function Voice() {
 
         const blob = new Blob(chunksRef.current, { type: mr.mimeType });
         const url = URL.createObjectURL(blob);
-        setAudioBlob(blob);
+
+        const ext = mr.mimeType.includes("webm") ? "webm" : "wav";
+        const file = new File([blob], `recording.${ext}`, { type: mr.mimeType });
+
+        setAudioFile(file);
         setAudioUrl(url);
       };
 
@@ -75,14 +80,17 @@ export default function Voice() {
 
           <h3>Debug Info</h3>
           <pre style={{ background: "#f4f4f4", color: "#111", padding: "1rem" }}>
-            {JSON.stringify(
+            {
+            JSON.stringify(
               {
-                mimeType: audioBlob?.type,
-                sizeBytes: audioBlob?.size,
+                name: audioFile?.name,
+                mimeType: audioFile?.type,
+                sizeBytes: audioFile?.size,
               },
               null,
               2
-            )}
+            )
+          }
           </pre>
         </>
       )}
