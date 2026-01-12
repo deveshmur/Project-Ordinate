@@ -24,3 +24,22 @@ export async function processText(templateKey, rawText) {
 
   return res.json();
 }
+
+export async function uploadAudio(audioFile) {
+  const form = new FormData();
+  form.append("audio", audioFile);
+
+  const res = await fetch(`${API_BASE}/voice/upload`, {
+    method: "POST",
+    body: form,
+  });
+
+  if (!res.ok) {
+    const data = await res.json().catch(() => null);
+    const msg = data?.message || `Upload failed (${res.status})`;
+    throw new Error(msg);
+  }
+
+  return res.json();
+}
+

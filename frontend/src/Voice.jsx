@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { uploadAudio } from "./api/ordinateApi";
 
 export default function Voice() {
   const mediaRecorderRef = useRef(null);
@@ -8,12 +9,15 @@ export default function Voice() {
   const [audioUrl, setAudioUrl] = useState(null);
   const [audioFile, setAudioFile] = useState(null);
   const [error, setError] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadResult, setUploadResult] = useState(null);
 
-
-  async function startRecording() {
+    async function startRecording() {
     setError(null);
     setAudioUrl(null);
     setAudioFile(null);
+    setUploadResult(null);
+    setUploading(false);
 
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -57,6 +61,23 @@ export default function Voice() {
     setRecording(false);
   }
 
+    async function handleUpload() {
+    if (!audioFile) return;
+
+    setError(null);
+    setUploading(true);
+    setUploadResult(null);
+
+    try {
+      const data = await uploadAudio(audioFile);
+      setUploadResult(data);
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setUploading(false);
+    }
+  }
+
   return (
     <div style={{ padding: "1rem", maxWidth: "800px", margin: "0 auto" }}>
 
@@ -71,6 +92,10 @@ export default function Voice() {
         </button>
       </div>
 
+      <button onClick={handleUpload} disabled={!audioFile || uploading}>
+        {uploading ? "Uploading..." : "Upload to Backend"}
+      </button>
+
       {recording && <p>Recording…</p>}
 
       {audioUrl && (
@@ -79,6 +104,14 @@ export default function Voice() {
           <audio controls src={audioUrl} />
 
           <h3>Debug Info</h3>
+          {uploadResult && (
+          <>
+            <h3>Backend Response</h3>
+            <pre style={{ background: "#f4f4f4", color: "#111", padding: "1rem" }}>
+              {JSON.stringify(uploadResult, null, 2)}
+            </pre>
+          </>
+        )}
           <pre style={{ background: "#f4f4f4", color: "#111", padding: "1rem" }}>
             {
             JSON.stringify(
